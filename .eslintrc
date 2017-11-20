@@ -1,0 +1,14 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0
+  },
+  "extends": ["standard", "standard-react"],
+  "globals": {
+    "it": true,
+    "window": true,
+    "Headers": true,
+    "fetch": true,
+    "URL": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "countries",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "keymirror": "^0.1.1",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-redux": "^5.0.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.2.1",
+    "redux-saga": "^0.14.3",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "node_modules/.bin/eslint src --ext .js",
+    "lint:fix": "node_modules/.bin/eslint src --fix --ext .js"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
