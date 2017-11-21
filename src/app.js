@@ -1,36 +1,16 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
-import { getCountiresRequest } from './actions/countries'
-import { getCountries } from './selectors/countries'
+import CountriesContainer from './container/countriesContainer'
 
-class App extends Component {
-  static propTypes = {
-    getCountiresRequest: PropTypes.func
-  }
+const theme = createMuiTheme()
 
-  componentWillMount () {
-    this.props.getCountiresRequest()
-  }
+const App = () => (
+  <MuiThemeProvider theme={theme}>
+    <div>
+      <CountriesContainer />
+    </div>
+  </MuiThemeProvider>
+)
 
-  render () {
-    return (
-      <div>
-        <p>test</p>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = state => ({
-  countries: getCountries(state)
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getCountiresRequest: () => dispatch(getCountiresRequest())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

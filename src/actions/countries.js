@@ -1,12 +1,24 @@
 import { createAction } from 'redux-actions'
 import ActionTypes from './types'
 
-const getCountiresRequest = createAction(ActionTypes.COUNTRIES__GET)
+const getCountriesRequest = createAction(ActionTypes.COUNTRIES__GET)
 const getCountiresSucceeded = createAction(ActionTypes.COUNTRIES__GET_SUCCEEDED)
 const getCountiresFailed = createAction(ActionTypes.COUNTRIES__GET_FAILED)
 
+const setCurrentCountry = createAction(ActionTypes.COUNTRIES__SET_CURRENT_COUNTRY)
+const setCurrentCountryFailed = createAction(ActionTypes.COUNTRIES__SET_CURRENT_COUNTRY_FAILED)
+const setCurrentCountryBorders = createAction(ActionTypes.COUNTRIES__SET_CURRENT_COUNTRY_BORDERS)
+
+const sortCountries = createAction(ActionTypes.COUNTRIES__SORT)
+const setSortedCountries = createAction(ActionTypes.COUNTRIES__SET_SORTED)
+
 export {
-  getCountiresRequest,
+  getCountriesRequest,
   getCountiresSucceeded,
-  getCountiresFailed
+  getCountiresFailed,
+  setCurrentCountry,
+  setCurrentCountryFailed,
+  setCurrentCountryBorders,
+  sortCountries,
+  setSortedCountries
 }
