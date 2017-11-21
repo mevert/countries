@@ -16,6 +16,7 @@ import {
 
 import {
   getCountries,
+  getCountriesEnglish,
   getCurrentCountry,
   sortBy
 } from '../selectors/countries'
@@ -33,6 +34,9 @@ class CountriesContainer extends Component {
       name: PropTypes.string
     }),
     countries: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string
+    })),
+    countriesEnglish: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string
     })),
     sortBy: PropTypes.string
@@ -78,7 +82,9 @@ class CountriesContainer extends Component {
         <Grid container>
           <Grid item xs={12} sm={4} >
             <Countries
-              countries={this.props.countries}
+              countries={this.props.sortBy === 'english'
+                ? this.props.countriesEnglish
+                : this.props.countries}
               setCurrentCountry={this.props.setCurrentCountry}
             />
           </Grid>
@@ -96,6 +102,7 @@ class CountriesContainer extends Component {
 
 const mapStateToProps = state => ({
   countries: getCountries(state),
+  countriesEnglish: getCountriesEnglish(state),
   currentCountry: getCurrentCountry(state),
   sortBy: sortBy(state)
 })

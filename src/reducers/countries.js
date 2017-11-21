@@ -33,6 +33,14 @@ const countries = handleActions({
       }
     }
   },
+  [ActionTypes.COUNTRIES__SET_ENGLISH]: {
+    next (state, action) {
+      return {
+        ...state,
+        countriesEnglish: action.payload
+      }
+    }
+  },
   [ActionTypes.COUNTRIES__SET_CURRENT_COUNTRY]: {
     next (state, action) {
       return {

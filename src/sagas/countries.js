@@ -6,7 +6,8 @@ import {
   setCurrentCountry,
   setCurrentCountryBorders,
   sortCountries,
-  setSortedCountries
+  setSortedCountries,
+  setEnglishCountries
 } from '../actions/countries'
 
 import { fetchCountries } from '../services/api/countries'
@@ -15,13 +16,16 @@ import {
   sortCountriesByName,
   sortCountriesByPopulation,
   sortCountriesByArea,
-  sortCountriesByEnglish
+  sortCountriesByEnglish,
+  getCountries
 } from '../selectors/countries'
 
 function * handleGetCountriesRequest () {
   try {
     const countries = yield call(fetchCountries)
     yield put(getCountiresSucceeded(countries))
+    const englishCountries = yield select(sortCountriesByEnglish)
+    yield put(setEnglishCountries(englishCountries))
   } catch (err) {
     yield put(getCountiresFailed(err.message))
   }
@@ -35,7 +39,7 @@ function * handleSetCurrentCountry (action) {
 
 function * handleSortCountries (action) {
   const sortBy = action.payload
-  let countries
+  let countries = yield select(getCountries)
   switch (sortBy) {
     case 'name':
       countries = yield select(sortCountriesByName)
@@ -45,9 +49,6 @@ function * handleSortCountries (action) {
       break
     case 'area':
       countries = yield select(sortCountriesByArea)
-      break
-    case 'english':
-      countries = yield select(sortCountriesByEnglish)
       break
     default:
       break

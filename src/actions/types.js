@@ -8,7 +8,8 @@ const countriesActionTypes = keyMirror({
   COUNTRIES__SET_CURRENT_COUNTRY_FAILED: null,
   COUNTRIES__SET_CURRENT_COUNTRY_BORDERS: null,
   COUNTRIES__SORT: null,
-  COUNTRIES__SET_SORTED: null
+  COUNTRIES__SET_SORTED: null,
+  COUNTRIES__SET_ENGLISH: null
 })
 
 export default {
