@@ -15,6 +15,7 @@ class Country extends Component {
   static propTypes = {
     country: PropTypes.shape({
       name: PropTypes.string,
+      capital: PropTypes.string,
       flag: PropTypes.string,
       population: PropTypes.number,
       area: PropTypes.number,
@@ -43,12 +44,13 @@ class Country extends Component {
     if (!this.props.country) {
       return (<p style={country}>Scroll and select country from the list</p>)
     }
-    const { name, flag, population, area } = this.props.country
+    const { name, flag, population, area, capital } = this.props.country
     return (
       <div style={country}>
         <h1>{name}</h1>
         <img alt={name} width={'200px'} src={flag} />
-        <p>Area: {area}</p>
+        <p>Capital: {capital}</p>
+        <p>Area: {area} km<sup>2</sup></p>
         <p>Population: {population}</p>
         <h2>Neighbors</h2>
         {this.renderBorderCountries(this.props.country.borderCountries)}

@@ -25,6 +25,13 @@ const sortByText = {
   marginLeft: '15px'
 }
 
+const countriesStyle = {
+  margin: '15px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  borderColor: 'rgba(0, 0, 0, 0.12)'
+}
+
 class CountriesContainer extends Component {
   static propTypes = {
     getCountriesRequest: PropTypes.func,
@@ -75,7 +82,6 @@ class CountriesContainer extends Component {
             >
               Only english speaking countries
             </Button>
-            <p style={sortByText}>{ this.props.sortBy ? `Sort by ${this.props.sortBy}` : '' }</p>
           </Grid>
         </Grid>
         <Divider />
@@ -86,7 +92,9 @@ class CountriesContainer extends Component {
               setCurrentCountry={this.props.setCurrentCountry}
             />
           </Grid>
-          <Grid item xs={12} sm={4} >
+          <Grid item xs={12} sm={4} style={countriesStyle} >
+            <p style={sortByText}>{ this.props.sortBy ? `Sort by: ${this.props.sortBy}` : 'Sort by: none' }</p>
+            <Divider />
             <Countries
               countries={this.props.sortBy === 'english'
                 ? this.props.countriesEnglish
