@@ -80,17 +80,17 @@ class CountriesContainer extends Component {
         </Grid>
         <Divider />
         <Grid container>
+          <Grid item xs={12} sm={6} >
+            <Country
+              country={this.props.currentCountry}
+              setCurrentCountry={this.props.setCurrentCountry}
+            />
+          </Grid>
           <Grid item xs={12} sm={4} >
             <Countries
               countries={this.props.sortBy === 'english'
                 ? this.props.countriesEnglish
                 : this.props.countries}
-              setCurrentCountry={this.props.setCurrentCountry}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} >
-            <Country
-              country={this.props.currentCountry}
               setCurrentCountry={this.props.setCurrentCountry}
             />
           </Grid>

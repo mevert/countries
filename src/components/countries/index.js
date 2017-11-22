@@ -4,7 +4,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List'
 
 const listStyle = {
   overflow: 'auto',
-  'maxHeight': '600px'
+  'maxHeight': '400px'
 }
 
 class Countries extends Component {

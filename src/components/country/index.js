@@ -7,6 +7,10 @@ const linkStyle = {
   cursor: 'pointer'
 }
 
+const country = {
+  textAlign: 'center'
+}
+
 class Country extends Component {
   static propTypes = {
     country: PropTypes.shape({
@@ -37,11 +41,11 @@ class Country extends Component {
 
   render () {
     if (!this.props.country) {
-      return (<p>Scroll and select country from the list</p>)
+      return (<p style={country}>Scroll and select country from the list</p>)
     }
     const { name, flag, population, area } = this.props.country
     return (
-      <div>
+      <div style={country}>
         <h1>{name}</h1>
         <img alt={name} width={'200px'} src={flag} />
         <p>Area: {area}</p>
