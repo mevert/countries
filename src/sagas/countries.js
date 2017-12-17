@@ -7,7 +7,8 @@ import {
   setCurrentCountryBorders,
   sortCountries,
   setSortedCountries,
-  setEnglishCountries
+  setEnglishCountries,
+  changeCountriesOrder
 } from '../actions/countries'
 
 import { fetchCountries } from '../services/api/countries'
@@ -17,7 +18,9 @@ import {
   sortCountriesByPopulation,
   sortCountriesByArea,
   sortCountriesByEnglish,
-  getCountries
+  getCountries,
+  sortingOrder,
+  sortBy
 } from '../selectors/countries'
 
 function * handleGetCountriesRequest () {
@@ -39,21 +42,27 @@ function * handleSetCurrentCountry (action) {
 
 function * handleSortCountries (action) {
   const sortBy = action.payload
+  const order = yield select(sortingOrder)
   let countries = yield select(getCountries)
   switch (sortBy) {
     case 'name':
-      countries = yield select(sortCountriesByName)
+      countries = yield select(sortCountriesByName, order)
       break
     case 'population':
-      countries = yield select(sortCountriesByPopulation)
+      countries = yield select(sortCountriesByPopulation, order)
       break
     case 'area':
-      countries = yield select(sortCountriesByArea)
+      countries = yield select(sortCountriesByArea, order)
       break
     default:
       break
   }
   yield put(setSortedCountries(countries))
+}
+
+function * handleChangeCountriesOrder (action) {
+  const by = yield select(sortBy)
+  yield put(sortCountries(by))
 }
 
 function * watchGetCountriesRequest () {
@@ -68,8 +77,13 @@ function * watchSortCountries () {
   yield takeLatest(sortCountries, handleSortCountries)
 }
 
+function * watchChangeCountriesOrder () {
+  yield takeLatest(changeCountriesOrder, handleChangeCountriesOrder)
+}
+
 export default [
   watchGetCountriesRequest,
   watchsetCurrentCountry,
-  watchSortCountries
+  watchSortCountries,
+  watchChangeCountriesOrder
 ]

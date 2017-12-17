@@ -1,42 +1,27 @@
 
-const compareArea = (a, b) => {
-  const numA = a.area
-  const numB = b.area
-  let comparison = 0
-  if (numA < numB) {
-    comparison = 1
-  } else if (numB < numA) {
-    comparison = -1
+const isValidKeys = (key, a, b) =>
+  (a.hasOwnProperty(key) || b.hasOwnProperty(key))
+
+const compareStrings = (key, order) => (a, b) => {
+  if (!isValidKeys(key, a, b)) {
+    return 0
   }
-  return comparison
+  // sorting strings with non-ASCII characters
+  const c = a[key].toUpperCase().localeCompare(b[key].toUpperCase())
+  // ascending order by default
+  return (order === 'desc') ? (c * -1) : c
 }
 
-const comparePopulation = (a, b) => {
-  const numA = a.population
-  const numB = b.population
-  let comparison = 0
-  if (numA < numB) {
-    comparison = 1
-  } else if (numB < numA) {
-    comparison = -1
+const compareNumbers = (key, order) => (a, b) => {
+  if (!isValidKeys(key, a, b)) {
+    return 0
   }
-  return comparison
-}
-
-const compareName = (a, b) => {
-  const nameA = a.name.toUpperCase()
-  const nameB = b.name.toUpperCase()
-  let comparison = 0
-  if (nameA > nameB) {
-    comparison = 1
-  } else if (nameA < nameB) {
-    comparison = -1
-  }
-  return comparison
+  const c = a[key] - b[key]
+  // ascending order by default
+  return (order === 'desc') ? (c * -1) : c
 }
 
 export {
-  compareArea,
-  comparePopulation,
-  compareName
+  compareStrings,
+  compareNumbers
 }

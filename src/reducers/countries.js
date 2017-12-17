@@ -5,7 +5,8 @@ const initialState = {
   countries: [],
   currentCountry: undefined,
   sorting: {
-    sortBy: undefined
+    sortBy: undefined,
+    order: 'asc'
   }
 }
 
@@ -77,6 +78,7 @@ const countries = handleActions({
       return {
         ...state,
         sorting: {
+          ...state.sorting,
           sortBy: action.payload
         }
       }
@@ -90,6 +92,17 @@ const countries = handleActions({
       }
     }
   },
+  [ActionTypes.COUNTRIES__CHANGE_ORDER]: {
+    next (state, action) {
+      return {
+        ...state,
+        sorting: {
+          ...state.sorting,
+          order: (state.sorting.order === 'asc' ? 'desc' : 'asc')
+        }
+      }
+    }
+  }
 }, initialState)
 
 export default countries

@@ -11,14 +11,16 @@ import Country from '../components/country'
 import {
   getCountriesRequest,
   setCurrentCountry,
-  sortCountries
+  sortCountries,
+  changeCountriesOrder
 } from '../actions/countries'
 
 import {
   getCountries,
   getCountriesEnglish,
   getCurrentCountry,
-  sortBy
+  sortBy,
+  sortingOrder
 } from '../selectors/countries'
 
 const sortByText = {
@@ -37,6 +39,7 @@ class CountriesContainer extends Component {
     getCountriesRequest: PropTypes.func,
     setCurrentCountry: PropTypes.func,
     sortCountries: PropTypes.func,
+    changeOrder: PropTypes.func,
     currentCountry: PropTypes.shape({
       name: PropTypes.string
     }),
@@ -46,11 +49,17 @@ class CountriesContainer extends Component {
     countriesEnglish: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string
     })),
-    sortBy: PropTypes.string
+    sortBy: PropTypes.string,
+    order: PropTypes.string
   }
 
   componentWillMount = () => {
     this.props.getCountriesRequest()
+    this.props.sortCountries('name')
+  }
+
+  changeOrder = () => {
+    this.props.changeOrder()
   }
 
   render () {
@@ -93,7 +102,22 @@ class CountriesContainer extends Component {
             />
           </Grid>
           <Grid item xs={12} sm={4} style={countriesStyle} >
-            <p style={sortByText}>{ this.props.sortBy ? `Sort by: ${this.props.sortBy}` : 'Sort by: none' }</p>
+            <Grid container>
+              <Grid item sm={6} >
+                <p style={sortByText}>{ this.props.sortBy ? `Sort by: ${this.props.sortBy}` : 'Sort by: none' }</p>
+              </Grid>
+              <Grid item sm={6} >
+                {
+                  (this.props.sortBy !== 'english') &&
+                    <Button
+                      color='primary'
+                      onClick={this.changeOrder}
+                    >
+                      Order: {this.props.order}
+                    </Button>
+                }
+              </Grid>
+            </Grid>
             <Divider />
             <Countries
               countries={this.props.sortBy === 'english'
@@ -112,14 +136,16 @@ const mapStateToProps = state => ({
   countries: getCountries(state),
   countriesEnglish: getCountriesEnglish(state),
   currentCountry: getCurrentCountry(state),
-  sortBy: sortBy(state)
+  sortBy: sortBy(state),
+  order: sortingOrder(state)
 })
 
 const mapDispatchToProps = dispatch => {
   return {
     getCountriesRequest: () => dispatch(getCountriesRequest()),
     setCurrentCountry: (country) => dispatch(setCurrentCountry(country)),
-    sortCountries: (sortBy) => dispatch(sortCountries(sortBy))
+    sortCountries: (sortBy) => dispatch(sortCountries(sortBy)),
+    changeOrder: () => dispatch(changeCountriesOrder())
   }
 }
 

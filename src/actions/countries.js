@@ -11,6 +11,8 @@ const setCurrentCountryBorders = createAction(ActionTypes.COUNTRIES__SET_CURRENT
 
 const setEnglishCountries = createAction(ActionTypes.COUNTRIES__SET_ENGLISH)
 
+const changeCountriesOrder = createAction(ActionTypes.COUNTRIES__CHANGE_ORDER)
+
 const sortCountries = createAction(ActionTypes.COUNTRIES__SORT)
 const setSortedCountries = createAction(ActionTypes.COUNTRIES__SET_SORTED)
 
@@ -23,5 +25,6 @@ export {
   setCurrentCountryBorders,
   setEnglishCountries,
   sortCountries,
-  setSortedCountries
+  setSortedCountries,
+  changeCountriesOrder
 }

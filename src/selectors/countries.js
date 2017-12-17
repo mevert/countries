@@ -1,7 +1,6 @@
 import {
-  compareArea,
-  compareName,
-  comparePopulation
+  compareStrings,
+  compareNumbers
 } from '../utils/sorting'
 
 const getCountries = state => state.countries.countries
@@ -14,16 +13,16 @@ const getBorderCountries = (state, selectedCountry) => (
   getCountries(state).filter(country => country.borders.includes(selectedCountry.alpha3Code))
 )
 
-const sortCountriesByName = state => (
-  getCountries(state).sort(compareName)
+const sortCountriesByName = (state, order) => (
+  getCountries(state).sort(compareStrings('name', order))
 )
 
-const sortCountriesByPopulation = state => (
-  getCountries(state).sort(comparePopulation)
+const sortCountriesByPopulation = (state, order) => (
+  getCountries(state).sort(compareNumbers('population', order))
 )
 
-const sortCountriesByArea = state => (
-  getCountries(state).sort(compareArea)
+const sortCountriesByArea = (state, order) => (
+  getCountries(state).sort(compareNumbers('area', order))
 )
 
 const sortCountriesByEnglish = (state) => (
@@ -35,6 +34,8 @@ const sortCountriesByEnglish = (state) => (
 
 const sortBy = state => state.countries.sorting.sortBy
 
+const sortingOrder = state => state.countries.sorting.order
+
 export {
   getCountries,
   getCountriesEnglish,
@@ -44,5 +45,6 @@ export {
   sortCountriesByPopulation,
   sortCountriesByArea,
   sortCountriesByEnglish,
-  sortBy
+  sortBy,
+  sortingOrder
 }
